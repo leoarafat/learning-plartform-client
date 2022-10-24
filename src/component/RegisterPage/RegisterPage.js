@@ -6,7 +6,7 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const { createUser, profileUpdated } = useContext(AuthContext);
+  const { createUser, profileUpdated,updateEmail } = useContext(AuthContext);
 
   const handleRegisterForm = (e) => {
     e.preventDefault();
@@ -23,6 +23,7 @@ const RegisterPage = () => {
         const user = userCredential.user;
         console.log(user);
         updateUserProfile(fullName, photoURL);
+        verifyEmail()
         setSuccess(true);
         setError("");
         // ...
@@ -42,6 +43,13 @@ const RegisterPage = () => {
     };
     profileUpdated(profile);
   };
+
+  const verifyEmail = () =>{
+    updateEmail()
+    .then(()=>{
+
+    })
+  }
 
   return (
     <div className="flex items-center justify-center text-center dark:bg-gray-900 dark:text-gray-100">

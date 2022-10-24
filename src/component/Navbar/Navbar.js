@@ -4,7 +4,17 @@ import { ComputerDesktopIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/UserContext";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user,logOut } = useContext(AuthContext);
+
+  const handleLogOut =()=>{
+    logOut()
+    .then(() => {
+        // Sign-out successful.
+      }).catch((error) => {
+        // An error happened.
+      });
+  }
+
 
   return (
     <div>
@@ -48,11 +58,16 @@ const Navbar = () => {
                       <img className="w-[30px]" src={user?.photoURL} alt="" />
                    
                   </li>
+                  <li>
+                    <Link onClick={handleLogOut}>LogOut</Link>
+                  </li>
                 </>
               ) : (
-                <>
-                  <Link to="/login">Login</Link>
-                </>
+               
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+             
               )}
               <li>
                 <Link to="/register">Register</Link>
@@ -86,11 +101,16 @@ const Navbar = () => {
                     <img className="w-[30px]" src={user?.photoURL} alt="" />
                   
                 </li>
+                <li>
+                    <Link onClick={handleLogOut}>LogOut</Link>
+                  </li>
               </>
             ) : (
-              <>
+              
+                <li>
                 <Link to="/login">Login</Link>
-              </>
+              </li>
+             
             )}
             <li>
               <Link to="/register">Register</Link>
