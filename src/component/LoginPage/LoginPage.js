@@ -8,11 +8,37 @@ const LoginPage = () => {
 const [error, setError] = useState('')
 const [success, setSuccess] = useState(false)
 
-const {user} = useContext(AuthContext)
+const {userLogin} = useContext(AuthContext)
 
     const handleLoginForm = e =>{
+        e.preventDefault()
+        setSuccess(false)
+        const form =  e.target ;
+        const email = form.email.value ;
+        const password = form.password.value; 
+        handleUserLogin(email, password)
+        form.reset()
 
     }
+
+    const handleUserLogin = (email, password) =>{
+        userLogin(email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user)
+            setError('')
+            setSuccess(true)
+            
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setError(errorMessage, errorCode)
+          });
+    }
+
 
     return (
         <div className=''>
@@ -22,16 +48,18 @@ const {user} = useContext(AuthContext)
 		<div className="space-y-1 text-sm">
 			<label for="email" className="block dark:text-gray-400">Email</label>
 			<input type="email" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray- text-black
-            focus:dark:border-violet-400" />
+            focus:dark:border-violet-400" required />
 		</div>
 		<div className="space-y-1 text-sm">
 			<label for="password" className="block dark:text-gray-400">Password</label>
-			<input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 text-black  focus:dark:border-violet-400" />
+			<input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 text-black  focus:dark:border-violet-400" required />
 			<div className="flex justify-end text-xs dark:text-gray-400">
 				<Link rel="noopener noreferrer" to="#">Forgot Password?</Link>
 			</div>
 		</div>
 		<button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">Sign in</button>
+        {error}
+        {success && <small>Login Successful</small> }
 	</form>
 	<div className="flex items-center pt-4 space-x-1">
 		<div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>

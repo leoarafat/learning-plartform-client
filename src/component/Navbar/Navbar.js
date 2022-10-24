@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ComputerDesktopIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "../Context/UserContext";
 
 const Navbar = () => {
+
+    const {user} = useContext(AuthContext)
+
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -49,11 +53,13 @@ const Navbar = () => {
               <li>
                 <input type="checkbox" className="toggle" checked />
               </li>
-
             </ul>
           </div>
-          
-          <Link className="btn btn-ghost normal-case text-xl"><ComputerDesktopIcon className="w-6 h-6"/>Learn Program With AP</Link>
+
+          <Link className="btn btn-ghost normal-case text-xl">
+            <ComputerDesktopIcon className="w-6 h-6" />
+            Learn Program With AP
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
@@ -67,14 +73,14 @@ const Navbar = () => {
               <Link to="/blog">Blog</Link>
             </li>
             <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link>log out</Link>
-              </li>
-              <li>
-                <Link to="/register">Register</Link>
-              </li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link>log out</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
             <li>
               <div className="form-control">
                 <label className="label cursor-pointer">
@@ -89,8 +95,9 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end">
-          <Link className="btn">Get started</Link>
+        <div className="navbar-end flex justify-evenly">
+          <p>{user?.displayName}</p>
+          <img src={user?.photoURL} alt="" />
         </div>
       </div>
     </div>
@@ -98,4 +105,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
