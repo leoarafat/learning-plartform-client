@@ -4,8 +4,7 @@ import { ComputerDesktopIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/UserContext";
 
 const Navbar = () => {
-
-    const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
     <div>
@@ -41,12 +40,20 @@ const Navbar = () => {
               <li>
                 <Link to="/blog">Blog</Link>
               </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link>log out</Link>
-              </li>
+
+              {user?.uid || user?.photoURL? (
+                <>
+                  <li>
+                    
+                      <img className="w-[30px]" src={user?.photoURL} alt="" />
+                   
+                  </li>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">Login</Link>
+                </>
+              )}
               <li>
                 <Link to="/register">Register</Link>
               </li>
@@ -72,12 +79,19 @@ const Navbar = () => {
             <li>
               <Link to="/blog">Blog</Link>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link>log out</Link>
-            </li>
+            {user?.uid || user?.photoURL ? (
+              <>
+                <li>
+                 
+                    <img className="w-[30px]" src={user?.photoURL} alt="" />
+                  
+                </li>
+              </>
+            ) : (
+              <>
+                <Link to="/login">Login</Link>
+              </>
+            )}
             <li>
               <Link to="/register">Register</Link>
             </li>
@@ -97,7 +111,6 @@ const Navbar = () => {
         </div>
         <div className="navbar-end flex justify-evenly">
           <p>{user?.displayName}</p>
-          <img src={user?.photoURL} alt="" />
         </div>
       </div>
     </div>
