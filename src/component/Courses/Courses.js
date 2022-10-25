@@ -1,21 +1,27 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
-import CardDetail from "../Card.detail/CardDetail";
-import CourseCard from "../CourseCard/CourseCard";
+import React, { useEffect, useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
+import Category from "../Category/Category";
 
 const Courses = () => {
-  const data = useLoaderData();
-  // console.log(data)
+  const [userData, setData] = useState([])
+  useEffect(()=>{
+    fetch('http://localhost:5000/course-category')
+    .then(res => res.json())
+    .then(data => setData(data)
+    )
+  },[])
 
   return (
-    <div className="grid grid-cols-2 m-[50px]">
+    <div className="lg:grid grid-cols-2 md:grid-cols-2 sm:grid-cols-1 m-[50px]">
       <div>
-        {data.map((cards) => (
-          <CourseCard card={cards} />
+        {userData.map((categoryName) => (
+          <p>
+            <Link>{categoryName.name}</Link>
+          </p>
         ))}
       </div>
-      <div >
-        <CardDetail/>
+      <div className="lg:grid grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-3">
+        {userData.map(categoryDetail => <Category categoryDetail={categoryDetail}/>)}
       </div>
     </div>
   );
