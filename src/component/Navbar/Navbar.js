@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ComputerDesktopIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/UserContext";
-
+import { UserIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
@@ -76,16 +76,28 @@ const Navbar = () => {
               {user?.uid || user?.photoURL ? (
                 <>
                   <li>
-                    <img className="w-[30px]" src={user?.photoURL} alt="" />
+                    <img
+                      title={user?.displayName}
+                      className="w-[70px] h-[70px] rounded-[50%]"
+                      src={user?.photoURL}
+                      alt=""
+                    />
                   </li>
                   <li>
                     <Link onClick={handleLogOut}>LogOut</Link>
                   </li>
                 </>
               ) : (
+                <>
+                <li>
+                  <Link className="btn btn-ghost normal-case text-xl">
+                    <UserIcon className="w-6 h-6" />
+                  </Link>
+                </li>
                 <li>
                   <Link to="/login">Login</Link>
                 </li>
+              </>
               )}
               <li>
                 <Link to="/register">Register</Link>
@@ -121,16 +133,28 @@ const Navbar = () => {
             {user?.uid || user?.photoURL ? (
               <>
                 <li>
-                  <img className="w-[30px]" src={user?.photoURL} alt="" />
+                  <img
+                    title={user?.displayName}
+                    className="w-[70px] h-[70px] rounded-[50%]"
+                    src={user?.photoURL}
+                    alt=""
+                  />
                 </li>
                 <li>
                   <Link onClick={handleLogOut}>LogOut</Link>
                 </li>
               </>
             ) : (
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
+              <>
+                <li>
+                  <Link className="btn btn-ghost normal-case text-xl">
+                    <UserIcon className="w-6 h-6" />
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              </>
             )}
             <li>
               <Link to="/register">Register</Link>

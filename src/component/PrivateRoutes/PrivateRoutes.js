@@ -9,7 +9,7 @@ if(loading){
     return <div>Loading...</div>
 }
 
-if(user && user.uid){
+if(user){
     return children
 }
 

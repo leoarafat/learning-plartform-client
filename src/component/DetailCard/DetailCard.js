@@ -7,6 +7,8 @@ const DetailCard = () => {
   const { description, img, name, title, id, location } = dataCard;
 //   console.log(dataCard);
 
+
+
   const navigate = useNavigate()
   const handlePremiumButton = () =>{
 navigate(`/checkOut/${id}`)

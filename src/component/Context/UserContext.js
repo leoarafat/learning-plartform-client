@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider()
 const gitHubProvider = new GithubAuthProvider()
 const UserContext = ({ children }) => {
-  const [user, setUser] = useState({ });
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   
@@ -22,8 +22,9 @@ const userLogin = (email, password) =>{
 
 useEffect(()=>{
   const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
-    setLoading(false)
+    
     setUser(currentUser)
+    setLoading(false)
   })
   return ()=>{
     unsubscribe()
@@ -34,6 +35,9 @@ const profileUpdated = (profile) =>{
   setLoading(true)
   return updateProfile(auth.currentUser,profile)
 }
+// const updateUserProfile = (profile) => {
+//   return updateProfile(auth.currentUser, profile);
+// }
 
 const updateEmail = () =>{
   setLoading(true)
@@ -55,7 +59,7 @@ const logInWithGit = () =>{
 
 
 
-  const userInfo = { user, setUser, loading, setLoading,createUser,userLogin,profileUpdated,updateEmail,logOut,googleLogin,logInWithGit };
+  const userInfo = { user, setUser, loading, setLoading,createUser,userLogin,updateEmail,logOut,googleLogin,logInWithGit,profileUpdated };
   return (
     <AuthContext.Provider value={userInfo}>
         {children}

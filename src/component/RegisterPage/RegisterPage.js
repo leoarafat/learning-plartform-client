@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
-
+import swal from 'sweetalert';
 const RegisterPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const { createUser, profileUpdated,updateEmail } = useContext(AuthContext);
-const navigate = useNavigate()
+  const { createUser, profileUpdated, updateEmail } = useContext(AuthContext);
+  // const navigate = useNavigate()
   const handleRegisterForm = (e) => {
-    e.preventDefault();
     setSuccess(false);
+    e.preventDefault();
     const form = e.target;
-    const fullName = form.fullName.value;
+    const name = form.name.value;
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
@@ -22,17 +22,19 @@ const navigate = useNavigate()
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        updateUserProfile(fullName, photoURL);
-        verifyEmail()
-        navigate('/')
-        setSuccess(true);
         setError("");
-        // ...
+        form.reset();
+        updateUserProfile(name, photoURL);
+        swal("Login successful!", "You can visit now!", "success");
+        verifyEmail();
+        // navigate('/')
+        // setSuccess(true);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage, errorCode);
+        swal("Wrong!", "Please try again letter", "warning")
         // ..
       });
   };
@@ -42,31 +44,29 @@ const navigate = useNavigate()
       displayName: name,
       photoURL: photoURL,
     };
-    profileUpdated(profile);
+    profileUpdated(profile)
+      .then(() => {})
+      .catch((error) => console.error(error));
   };
 
-  const verifyEmail = () =>{
-    updateEmail()
-    .then(()=>{
-
-    })
-  }
+  const verifyEmail = () => {
+    updateEmail().then(() => {});
+  };
 
   return (
     <div className="flex items-center justify-center text-center dark:bg-gray-900 dark:text-gray-100 w-[50%] mx-auto">
       <form
         onSubmit={handleRegisterForm}
-        novalidate=""
-        action=""
+    
         className="flex flex-col w-full max-w-lg p-12 rounded shadow-lg dark:text-gray-100 ng-untouched ng-pristine ng-valid"
       >
-        <label for="Fullname" className="self-start text-xs font-semibold">
+        <label for="name" className="self-start text-xs font-semibold">
           Full Name
         </label>
         <input
-          id="fullName"
+          id="name"
           type="text"
-          name="fullName"
+          name="name"
           className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 dark:text-gray-900 focus:dark:border-violet-400 focus:ring-violet-400"
           required
         />

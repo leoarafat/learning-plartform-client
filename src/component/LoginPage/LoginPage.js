@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/UserContext';
-
+import swal from 'sweetalert';
 const LoginPage = () => {
 
 
@@ -28,14 +28,15 @@ const from = location.state?.from.pathname || '/'
             navigate(from, {replace: true})
             form.reset()
             setError('')
-            setSuccess(true)
-            
+            // setSuccess(true)
+            swal("Good job!", "You clicked the button!", "success");
             // ...
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             setError(errorMessage, errorCode)
+            swal("Wrong!", "Please try again letter", "warning")
           });
 
     }
@@ -50,12 +51,14 @@ const from = location.state?.from.pathname || '/'
         .then(res =>{
             const user = res.user
             navigate(from, {replace: true})
+            swal("Login successful!", "You can visit now!", "success");
             console.log(user)
             
         })
         .catch(error=>{
             const errorMessage = error.errorMessage 
             setError(errorMessage)
+            swal("Wrong!", "Please try again letter", "warning")
         })
         
     }
