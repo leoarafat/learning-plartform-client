@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 
 const RegisterPage = () => {
@@ -7,7 +7,7 @@ const RegisterPage = () => {
   const [success, setSuccess] = useState(false);
 
   const { createUser, profileUpdated,updateEmail } = useContext(AuthContext);
-
+const navigate = useNavigate()
   const handleRegisterForm = (e) => {
     e.preventDefault();
     setSuccess(false);
@@ -24,6 +24,7 @@ const RegisterPage = () => {
         console.log(user);
         updateUserProfile(fullName, photoURL);
         verifyEmail()
+        navigate('/')
         setSuccess(true);
         setError("");
         // ...
@@ -52,7 +53,7 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="flex items-center justify-center text-center dark:bg-gray-900 dark:text-gray-100">
+    <div className="flex items-center justify-center text-center dark:bg-gray-900 dark:text-gray-100 w-[50%] mx-auto">
       <form
         onSubmit={handleRegisterForm}
         novalidate=""

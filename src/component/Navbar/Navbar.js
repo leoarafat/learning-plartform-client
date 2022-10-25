@@ -3,18 +3,40 @@ import { Link } from "react-router-dom";
 import { ComputerDesktopIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/UserContext";
 
-const Navbar = () => {
-  const { user,logOut } = useContext(AuthContext);
+import { useState, useEffect } from "react";
 
-  const handleLogOut =()=>{
+const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const [mode, setMode] = useState("light");
+  const storedMode = localStorage.getItem("mode");
+  if (storedMode == null) {
+    localStorage.setItem("mode", "light");
+  }
+  useEffect(() => {
+    setMode(storedMode);
+  }, [storedMode]);
+
+  const handleClick = () => {
+    if (storedMode == "light" || storedMode === null) {
+      localStorage.removeItem("mode");
+      localStorage.setItem("mode", "dark");
+      setMode("dark");
+    } else {
+      localStorage.removeItem("mode");
+      localStorage.setItem("mode", "light");
+      setMode("Light");
+    }
+  };
+
+  const handleLogOut = () => {
     logOut()
-    .then(() => {
+      .then(() => {
         // Sign-out successful.
-      }).catch((error) => {
+      })
+      .catch((error) => {
         // An error happened.
       });
-  }
-
+  };
 
   return (
     <div>
@@ -51,29 +73,30 @@ const Navbar = () => {
                 <Link to="/blog">Blog</Link>
               </li>
 
-              {user?.uid || user?.photoURL? (
+              {user?.uid || user?.photoURL ? (
                 <>
                   <li>
-                    
-                      <img className="w-[30px]" src={user?.photoURL} alt="" />
-                   
+                    <img className="w-[30px]" src={user?.photoURL} alt="" />
                   </li>
                   <li>
                     <Link onClick={handleLogOut}>LogOut</Link>
                   </li>
                 </>
               ) : (
-               
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-             
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
               )}
               <li>
                 <Link to="/register">Register</Link>
               </li>
               <li>
-                <input type="checkbox" className="toggle" checked />
+                <Link>
+                  <h2>{mode}</h2>
+                  <button className={`button-${mode}`} onClick={handleClick}>
+                    <input type="checkbox" className="toggle" checked />
+                  </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -94,38 +117,31 @@ const Navbar = () => {
             <li>
               <Link to="/blog">Blog</Link>
             </li>
+
             {user?.uid || user?.photoURL ? (
               <>
                 <li>
-                 
-                    <img className="w-[30px]" src={user?.photoURL} alt="" />
-                  
+                  <img className="w-[30px]" src={user?.photoURL} alt="" />
                 </li>
                 <li>
-                    <Link onClick={handleLogOut}>LogOut</Link>
-                  </li>
+                  <Link onClick={handleLogOut}>LogOut</Link>
+                </li>
               </>
             ) : (
-              
-                <li>
+              <li>
                 <Link to="/login">Login</Link>
               </li>
-             
             )}
             <li>
               <Link to="/register">Register</Link>
             </li>
             <li>
-              <div className="form-control">
-                <label className="label cursor-pointer">
-                  {/* <span className="label-text">Remember me</span> */}
-                  <input
-                    type="checkbox"
-                    className="toggle toggle-primary"
-                    checked
-                  />
-                </label>
-              </div>
+              <Link>
+                <h2>{mode}</h2>
+                <button className={`button-${mode}`} onClick={handleClick}>
+                  <input type="checkbox" className="toggle" checked />
+                </button>
+              </Link>
             </li>
           </ul>
         </div>
