@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ComputerDesktopIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/UserContext";
 import { UserIcon } from "@heroicons/react/24/solid";
@@ -37,6 +37,10 @@ const Navbar = () => {
         // An error happened.
       });
   };
+  const navigate = useNavigate()
+  const handleUserProfile = () =>{
+navigate('/userProfile')
+  }
 
   return (
     <div>
@@ -64,61 +68,65 @@ const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to="/home">Home</Link>
+                <NavLink to="/home">Home</NavLink>
               </li>
               <li>
-                <Link to="/courses">Courses</Link>
+                <NavLink to="/courses">Courses</NavLink>
               </li>
               <li>
-                <Link to="/faq">FAQ</Link>
+                <NavLink to="/faq">FAQ</NavLink>
               </li>
               <li>
-                <Link to="/blog">Blog</Link>
+                <NavLink to="/blog">Blog</NavLink>
               </li>
               <li>
-                <Link to="/register">Register</Link>
+                <NavLink to="/register">Register</NavLink>
               </li>
               <li>
-                <Link>
+                <NavLink>
                   <h2>{mode}</h2>
                   <button className={`button-${mode}`} onClick={handleClick}>
                     <input type="checkbox" className="toggle" checked />
                   </button>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>
 
-          <Link to="/courses" className="btn btn-ghost normal-case text-xl">
+          <NavLink to="/courses" className="btn btn-ghost normal-case text-xl">
             <ComputerDesktopIcon className="w-6 h-6" />
             Learn Program With AP
-          </Link>
+          </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
             <li>
-              <Link to="/home">Home</Link>
+              <NavLink to="/home">Home</NavLink>
             </li>
             <li>
-              <Link to="/courses">Courses</Link>
+              <NavLink to="/courses">Courses</NavLink>
             </li>
             <li>
-              <Link to="/faq">FAQ</Link>
+              <NavLink to="/faq">FAQ</NavLink>
             </li>
             <li>
-              <Link to="/blog">Blog</Link>
+              <NavLink to="/blog">Blog</NavLink>
             </li>
 
             <li>
-              <Link to="/register">Register</Link>
+              <NavLink to="/register">Register</NavLink>
             </li>
             <li>
-              <Link>
+              <NavLink
+                className={(isActive) =>
+                  "nav-link" + (!isActive ? " unselected" : "")
+                }
+              >
                 <h2>{mode}</h2>
                 <button className={`button-${mode}`} onClick={handleClick}>
                   <input type="checkbox" className="toggle" checked />
                 </button>
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -128,23 +136,24 @@ const Navbar = () => {
           {user?.uid || user?.photoURL ? (
             <>
               <img
+              onClick={handleUserProfile}
                 title={user?.displayName}
                 className="w-[50px] h-[50px] rounded-[50%]"
                 src={user?.photoURL}
                 alt=""
               />
 
-              <Link className="ml-5 mr-3" onClick={handleLogOut}>
+              <NavLink className="ml-5 mr-3" onClick={handleLogOut}>
                 LogOut
-              </Link>
+              </NavLink>
             </>
           ) : (
             <>
-              <Link className="btn btn-ghost normal-case text-xl">
+              <NavLink className="btn btn-ghost normal-case text-xl">
                 <UserIcon className="w-6 h-6" />
-              </Link>
+              </NavLink>
 
-              <Link to="/login">Login</Link>
+              <NavLink to="/login">Login</NavLink>
             </>
           )}
         </div>

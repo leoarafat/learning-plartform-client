@@ -15,6 +15,7 @@ import Pricing from "../../component/Pricing/Pricing";
 import PrivateRoutes from "../../component/PrivateRoutes/PrivateRoutes";
 
 import RegisterPage from "../../component/RegisterPage/RegisterPage";
+import UserProfile from "../../component/UserProfile/UserProfile";
 
 import Main from "../../layout/Main/Main";
 
@@ -74,6 +75,9 @@ export const router = createBrowserRouter([
         path: "/pricing",
         element: <Pricing />,
       },
+      {
+        path: '/userProfile', element: <UserProfile/>
+      }
     ],
   },
 ]);
