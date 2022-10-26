@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
-
+import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 const DetailCard = () => {
   const dataCard = useLoaderData();
   const { description, img, name, title, id } = dataCard;
@@ -23,9 +23,13 @@ const DetailCard = () => {
   return (
     <div ref={commonHref} style={{ width: "100%", height: window.innerHeight }}>
       <div className="card card-compact w-96 bg-base-100 shadow-xl mx-auto">
-        <button onClick={handlePrint} className="btn btn-outline btn-info my-2">
-          Download CV
-        </button>
+        <div className="flex justify-between bg-slate-400 items-center ">
+        <p className="text-black m-1">Download data</p>
+        <p className="m-1">
+        <ArrowDownTrayIcon onClick={handlePrint} className="w-8 h-8 text-black"/>
+        </p>
+
+        </div>
         <figure>
           <img src={img} alt="Shoes" />
         </figure>
