@@ -85,6 +85,7 @@ const Contact = () => {
               Submit
             </button>
           </form>
+          
         </div>
       </section>
     </div>

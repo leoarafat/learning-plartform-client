@@ -36,20 +36,20 @@ export const router = createBrowserRouter([
       {
         path: "/courses",
         loader: () => {
-          fetch("http://localhost:5000/course-category");
+          fetch("https://assignment-10-server-chi.vercel.app/course-category");
         },
         element: <Courses />,
       },
       {
         path: "/detailPage/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/courseData/${params.id}`),
+          fetch(`https://assignment-10-server-chi.vercel.app/courseData/${params.id}`),
         element: <DetailCard />,
       },
       {
         path: "/checkOut/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/courseData/${params.id}`),
+          fetch(`https://assignment-10-server-chi.vercel.app/courseData/${params.id}`),
         element: (
           <PrivateRoutes>
             <CheckOut />

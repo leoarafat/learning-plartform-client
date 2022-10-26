@@ -8,7 +8,7 @@ const Courses = () => {
   console.log(userData);
 
   useEffect(() => {
-    fetch("http://localhost:5000/course-category")
+    fetch("https://assignment-10-server-chi.vercel.app/course-category")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
@@ -18,12 +18,12 @@ const Courses = () => {
       <div className=" text-center  ">
         <h2 className="text-3xl text-purple-600 font-bold">Course Name:</h2>
         {userData.map((named) => (
-          <CategoryName named={named} />
+          <CategoryName key={named.id} named={named} />
         ))}
       </div>
       <div className="lg:grid grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-3 text-center ">
         {userData.map((categoryDetail) => (
-          <Category categoryDetail={categoryDetail} />
+          <Category key={categoryDetail.id} categoryDetail={categoryDetail} />
         ))}
       </div>
     </div>
