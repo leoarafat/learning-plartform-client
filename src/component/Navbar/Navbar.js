@@ -37,10 +37,10 @@ const Navbar = () => {
         // An error happened.
       });
   };
-  const navigate = useNavigate()
-  const handleUserProfile = () =>{
-navigate('/userProfile')
-  }
+  const navigate = useNavigate();
+  const handleUserProfile = () => {
+    navigate("/userProfile");
+  };
 
   return (
     <div>
@@ -83,7 +83,11 @@ navigate('/userProfile')
                 <NavLink to="/register">Register</NavLink>
               </li>
               <li>
-                <NavLink>
+                <NavLink
+                  className={(isActive) =>
+                    "nav-link" + (!isActive ? " unselected" : "")
+                  }
+                >
                   <h2>{mode}</h2>
                   <button className={`button-${mode}`} onClick={handleClick}>
                     <input type="checkbox" className="toggle" checked />
@@ -131,12 +135,14 @@ navigate('/userProfile')
           </ul>
         </div>
         <div className="navbar-end flex ">
-          <p className="mr-3 text-lg">{user?.displayName}</p>
+          <p onClick={handleUserProfile} className="mr-3 text-xl">
+            {user?.displayName}
+          </p>
 
           {user?.uid || user?.photoURL ? (
             <>
               <img
-              onClick={handleUserProfile}
+                onClick={handleUserProfile}
                 title={user?.displayName}
                 className="w-[50px] h-[50px] rounded-[50%]"
                 src={user?.photoURL}
@@ -144,16 +150,18 @@ navigate('/userProfile')
               />
 
               <NavLink className="ml-5 mr-3" onClick={handleLogOut}>
-                LogOut
+                <button className="btn btn-outline btn-info">Logout</button>
               </NavLink>
             </>
           ) : (
             <>
-              <NavLink className="btn btn-ghost normal-case text-xl">
+              <NavLink className="btn btn-ghost normal-case text-purple-700 text-xl">
                 <UserIcon className="w-6 h-6" />
               </NavLink>
 
-              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/login">
+                <button className="btn btn-outline btn-warning">Login</button>
+              </NavLink>
             </>
           )}
         </div>

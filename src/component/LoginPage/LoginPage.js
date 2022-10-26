@@ -2,11 +2,12 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 import swal from "sweetalert";
+import toast from "react-hot-toast";
 const LoginPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-
-  const { userLogin, googleLogin, logInWithGit } = useContext(AuthContext);
+const [userEmail, setUserEmail] = useState('')
+  const { userLogin, googleLogin, logInWithGit,handleEmailPassword } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -71,6 +72,27 @@ const LoginPage = () => {
       });
   };
 
+  const handleForgotPassword =() =>{
+    handleEmailPassword(userEmail)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+      toast('Check email and set new password')
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(errorMessage, errorCode)
+      // ..
+    });
+    
+  }
+
+  const handleEmail = (email) =>{
+setUserEmail(email.target.value)
+  }
+
+
   return (
     <div className="">
       <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 mx-auto mt-[100px]">
@@ -86,6 +108,7 @@ const LoginPage = () => {
               Email
             </label>
             <input
+            onBlur={handleEmail}
               type="email"
               name="email"
               id="email"
@@ -108,7 +131,7 @@ const LoginPage = () => {
               required
             />
             <div className="flex justify-end text-xs dark:text-gray-400">
-              <Link rel="noopener noreferrer" to="#">
+              <Link onClick={handleForgotPassword} rel="noopener noreferrer" to="#">
                 Forgot Password?
               </Link>
             </div>

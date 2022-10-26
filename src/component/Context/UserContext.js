@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -67,6 +68,11 @@ const UserContext = ({ children }) => {
     return signInWithPopup(auth, gitHubProvider);
   };
 
+  const handleEmailPassword = (email) =>{
+    return sendPasswordResetEmail(auth, email)
+  }
+
+
   const userInfo = {
     user,
     setUser,
@@ -79,6 +85,7 @@ const UserContext = ({ children }) => {
     googleLogin,
     logInWithGit,
     profileUpdated,
+    handleEmailPassword
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
