@@ -55,7 +55,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center text-center dark:bg-gray-900 dark:text-gray-100 w-[50%] mx-auto">
+    <div className="flex items-center justify-center text-center dark:bg-gray-900 dark:text-gray-100 md:w-[50%] mx-auto">
       <form
         onSubmit={handleRegisterForm}
         className="flex flex-col w-full max-w-lg p-12 rounded shadow-lg dark:text-gray-100 ng-untouched ng-pristine ng-valid"

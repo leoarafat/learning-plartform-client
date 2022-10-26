@@ -4,7 +4,7 @@ import { ComputerDesktopIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/UserContext";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
-
+import "./Navbar.css";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [mode, setMode] = useState("light");
@@ -44,7 +44,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 ">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -93,6 +93,43 @@ const Navbar = () => {
                     <input type="checkbox" className="toggle" checked />
                   </button>
                 </NavLink>
+                {/* sm nav */}
+                <div className="md:hidden flex flex-col">
+                  <p onClick={handleUserProfile} className="mr-3 text-xl">
+                    {user?.displayName}
+                  </p>
+
+                  {user?.uid || user?.photoURL ? (
+                    <>
+                      <img
+                        onClick={handleUserProfile}
+                        title={user?.displayName}
+                        className="w-[50px] h-[50px] rounded-[50%]"
+                        src={user?.photoURL}
+                        alt=""
+                      />
+
+                      <NavLink className="ml-5 mr-3" onClick={handleLogOut}>
+                        <button className="btn btn-outline btn-info">
+                          Logout
+                        </button>
+                      </NavLink>
+                    </>
+                  ) : (
+                    <>
+                      <NavLink className="btn btn-ghost normal-case text-purple-700 text-xl">
+                        <UserIcon className="w-6 h-6" />
+                      </NavLink>
+
+                      <NavLink to="/login">
+                        <button className="btn btn-outline btn-warning">
+                          Login
+                        </button>
+                      </NavLink>
+                    </>
+                  )}
+                </div>
+                {/* sm nav */}
               </li>
             </ul>
           </div>
@@ -134,7 +171,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end flex ">
+        <div className="navbar-end flex userInfo">
           <p onClick={handleUserProfile} className="mr-3 text-xl">
             {user?.displayName}
           </p>

@@ -95,7 +95,7 @@ setUserEmail(email.target.value)
 
   return (
     <div className="">
-      <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 mx-auto mt-[100px]">
+      <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-900 dark:text-gray-100 mx-auto mt-[50px]">
         <h1 className="text-2xl font-bold text-center">Login</h1>
         <form
           onSubmit={handleLoginForm}
