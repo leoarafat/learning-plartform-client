@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../../component/Blog/Blog";
 import CheckOut from "../../component/CheckOut/CheckOut";
+import Contact from "../../component/Contact/Contact";
 
 import Courses from "../../component/Courses/Courses";
 import DetailCard from "../../component/DetailCard/DetailCard";
@@ -10,6 +11,7 @@ import Faq from "../../component/Faq/Faq";
 import Home from "../../component/Home/Home";
 
 import LoginPage from "../../component/LoginPage/LoginPage";
+import Pricing from "../../component/Pricing/Pricing";
 import PrivateRoutes from "../../component/PrivateRoutes/PrivateRoutes";
 
 import RegisterPage from "../../component/RegisterPage/RegisterPage";
@@ -64,6 +66,14 @@ export const router = createBrowserRouter([
       },
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/pricing",
+        element: <Pricing />,
+      },
     ],
   },
 ]);

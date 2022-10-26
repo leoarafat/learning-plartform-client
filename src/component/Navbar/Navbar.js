@@ -17,7 +17,7 @@ const Navbar = () => {
   }, [storedMode]);
 
   const handleClick = () => {
-    if (storedMode == "light" || storedMode === null) {
+    if (storedMode === "light" || storedMode === null) {
       localStorage.removeItem("mode");
       localStorage.setItem("mode", "dark");
       setMode("dark");
@@ -64,6 +64,9 @@ const Navbar = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
                 <Link to="/courses">Courses</Link>
               </li>
               <li>
@@ -72,33 +75,6 @@ const Navbar = () => {
               <li>
                 <Link to="/blog">Blog</Link>
               </li>
-
-              {user?.uid || user?.photoURL ? (
-                <>
-                  <li>
-                    <img
-                      title={user?.displayName}
-                      className="w-[70px] h-[70px] rounded-[50%]"
-                      src={user?.photoURL}
-                      alt=""
-                    />
-                  </li>
-                  <li>
-                    <Link onClick={handleLogOut}>LogOut</Link>
-                  </li>
-                </>
-              ) : (
-                <>
-                <li>
-                  <Link className="btn btn-ghost normal-case text-xl">
-                    <UserIcon className="w-6 h-6" />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-              </>
-              )}
               <li>
                 <Link to="/register">Register</Link>
               </li>
@@ -113,13 +89,16 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <Link className="btn btn-ghost normal-case text-xl">
+          <Link to="/courses" className="btn btn-ghost normal-case text-xl">
             <ComputerDesktopIcon className="w-6 h-6" />
             Learn Program With AP
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
             <li>
               <Link to="/courses">Courses</Link>
             </li>
@@ -130,32 +109,6 @@ const Navbar = () => {
               <Link to="/blog">Blog</Link>
             </li>
 
-            {user?.uid || user?.photoURL ? (
-              <>
-                <li>
-                  <img
-                    title={user?.displayName}
-                    className="w-[70px] h-[70px] rounded-[50%]"
-                    src={user?.photoURL}
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <Link onClick={handleLogOut}>LogOut</Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link className="btn btn-ghost normal-case text-xl">
-                    <UserIcon className="w-6 h-6" />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-              </>
-            )}
             <li>
               <Link to="/register">Register</Link>
             </li>
@@ -169,8 +122,31 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end flex justify-evenly">
-          <p>{user?.displayName}</p>
+        <div className="navbar-end flex ">
+          <p className="mr-3 text-lg">{user?.displayName}</p>
+
+          {user?.uid || user?.photoURL ? (
+            <>
+              <img
+                title={user?.displayName}
+                className="w-[50px] h-[50px] rounded-[50%]"
+                src={user?.photoURL}
+                alt=""
+              />
+
+              <Link className="ml-5 mr-3" onClick={handleLogOut}>
+                LogOut
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link className="btn btn-ghost normal-case text-xl">
+                <UserIcon className="w-6 h-6" />
+              </Link>
+
+              <Link to="/login">Login</Link>
+            </>
+          )}
         </div>
       </div>
     </div>

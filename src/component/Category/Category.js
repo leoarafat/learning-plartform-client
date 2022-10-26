@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Category = ({ categoryDetail }) => {
   // console.log(categoryDetail);
-  const { description, img, name, title, id } = categoryDetail;
+  const { img, name, title, id } = categoryDetail;
   // console.log(id)
 
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Category = ({ categoryDetail }) => {
 
   return (
     <div>
-      <div className="card w-96 glass">
+      <div className="card w-96 h-[450px] glass mx-auto">
         <figure>
           <img src={img} alt="ima!" />
         </figure>

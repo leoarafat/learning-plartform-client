@@ -1,33 +1,42 @@
-import { data } from "autoprefixer";
-import React from "react";
+import React, { useRef } from "react";
+import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
 
 const DetailCard = () => {
   const dataCard = useLoaderData();
-  const { description, img, name, title, id, location } = dataCard;
-//   console.log(dataCard);
+  const { description, img, name, title, id } = dataCard;
+  //   console.log(dataCard);
 
+  const commonHref = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => commonHref.current,
+    documentTitle: "ema-data",
+    onAfterPrint: () => toast.success("Print Successful!"),
+  });
 
-
-  const navigate = useNavigate()
-  const handlePremiumButton = () =>{
-navigate(`/checkOut/${id}`)
-  }
+  const navigate = useNavigate();
+  const handlePremiumButton = () => {
+    navigate(`/checkOut/${id}`);
+  };
 
   return (
-    <div>
+    <div ref={commonHref} style={{ width: "100%", height: window.innerHeight }}>
       <div className="card card-compact w-96 bg-base-100 shadow-xl mx-auto">
-      <button className="btn btn-outline btn-info my-2">Download CV</button>
+        <button onClick={handlePrint} className="btn btn-outline btn-info my-2">
+          Download CV
+        </button>
         <figure>
-            
           <img src={img} alt="Shoes" />
         </figure>
         <div className="card-body">
-            <h1 className="text-2xl">{name}</h1>
+          <h1 className="text-2xl">{name}</h1>
           <h2 className="card-title">{title}</h2>
           <p>{description}</p>
           <div className="card-actions justify-end">
-            <button onClick={handlePremiumButton} className="btn btn-primary">Get Premium Access</button>
+            <button onClick={handlePremiumButton} className="btn btn-primary">
+              Get Premium Access
+            </button>
           </div>
         </div>
       </div>

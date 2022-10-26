@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 const RegisterPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
   const { createUser, profileUpdated, updateEmail } = useContext(AuthContext);
-  // const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from.pathname || "/";
   const handleRegisterForm = (e) => {
     setSuccess(false);
     e.preventDefault();
@@ -25,16 +27,15 @@ const RegisterPage = () => {
         setError("");
         form.reset();
         updateUserProfile(name, photoURL);
-        swal("Login successful!", "You can visit now!", "success");
+        navigate(from, { replace: true });
+        swal("Register successful!", "You can visit now!", "success");
         verifyEmail();
-        // navigate('/')
-        // setSuccess(true);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage, errorCode);
-        swal("Wrong!", "Please try again letter", "warning")
+        swal("Wrong!", "Please try again letter", "warning");
         // ..
       });
   };
@@ -57,7 +58,6 @@ const RegisterPage = () => {
     <div className="flex items-center justify-center text-center dark:bg-gray-900 dark:text-gray-100 w-[50%] mx-auto">
       <form
         onSubmit={handleRegisterForm}
-    
         className="flex flex-col w-full max-w-lg p-12 rounded shadow-lg dark:text-gray-100 ng-untouched ng-pristine ng-valid"
       >
         <label for="name" className="self-start text-xs font-semibold">
