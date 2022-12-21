@@ -1,57 +1,58 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
+import Lottie from "lottie-react";
+import Coding from "../../Animation/Coding.json";
+import CategoryName from "../CategoryName/CategoryName";
+import Category from "../Category/Category";
 
 const Home = () => {
+  const [userData, setData] = useState([]);
+  console.log(userData);
+
+  useEffect(() => {
+    fetch("https://assignment-10-server-chi.vercel.app/course-category")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
   return (
-    <div>
-      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 bg-slate-100">
-        <div className="relative mb-6 sm:mx-auto md:mb-10 md:max-w-md lg:max-w-lg">
-          <img
-            className="object-cover w-full h-56 rounded shadow-lg md:h-64 lg:h-80"
-            src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-            alt=""
-          />
-          <Link
-            href="/"
-            aria-label="Play Video"
-            className="absolute inset-0 flex items-center justify-center w-full h-full transition-colors duration-300 bg-gray-900 bg-opacity-50 group hover:bg-opacity-25"
-          >
-            <div className="flex items-center justify-center w-16 h-16 transition duration-300 transform bg-gray-100 rounded-full shadow-2xl group-hover:scale-110">
-              <svg
-                className="w-10 text-gray-900"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M16.53,11.152l-8-5C8.221,5.958,7.833,5.949,7.515,6.125C7.197,6.302,7,6.636,7,7v10 c0,0.364,0.197,0.698,0.515,0.875C7.667,17.958,7.833,18,8,18c0.184,0,0.368-0.051,0.53-0.152l8-5C16.822,12.665,17,12.345,17,12 S16.822,11.335,16.53,11.152z" />
-              </svg>
-            </div>
-          </Link>
-        </div>
-        <div className="mb-16 md:mb-0 md:max-w-xl sm:mx-auto md:text-center">
-          <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-            Welcome to our learning web{" "}
-            <span className="inline-block text-deep-purple-accent-400">
-              page
-            </span>
-          </h2>
-          <p className="mb-5 text-base text-gray-700 md:text-lg">
-            This is a web page which you can learn web development
-          </p>
-          <div className="flex items-center justify-center">
-            <Link
-              to="/courses"
-              className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-            >
-              Get started
-            </Link>
-            <Link
-              to="/faq"
-              aria-label=""
-              className="inline-flex items-center font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
-            >
-              Learn more
-            </Link>
+    <div className="">
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <div className="text-center lg:text-left">
+            <h1 className="text-5xl font-bold">Happy Coding</h1>
+            <p className="py-6">
+              This is a quality learning platform web application. Learners can
+              get their needed courses on this platform. Anyone can sign up for
+              their profile and they, can visit the course outline.After login
+              into this application, they can buy their needed course easily.
+            </p>
           </div>
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card-body">
+              <Lottie
+                className="lg:w-[350px] h-[350px]"
+                animationData={Coding}
+              ></Lottie>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className=" text-center  name-container">
+          <h2 className="text-3xl text-purple-600 font-bold">
+            Available Course
+          </h2>
+          {userData.map((named) => (
+            <CategoryName key={named.id} named={named} />
+          ))}
+        </div>
+        <div>
+        <div className=" detail-container">
+        {userData.map((categoryDetail) => (
+          <Category key={categoryDetail.id} categoryDetail={categoryDetail} />
+
+        ))}
+      </div>
         </div>
       </div>
     </div>

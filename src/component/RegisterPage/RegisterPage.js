@@ -55,10 +55,10 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center text-center dark:bg-gray-900 dark:text-gray-100 md:w-[50%] mx-auto">
+    <div className="flex items-center justify-center text-center bg-gray-900 text-gray-100 md:w-[50%] mx-auto">
       <form
         onSubmit={handleRegisterForm}
-        className="flex flex-col w-full max-w-lg p-12 rounded shadow-lg dark:text-gray-100 ng-untouched ng-pristine ng-valid"
+        className="flex flex-col w-full max-w-lg p-12 rounded shadow-lg text-gray-100 ng-untouched ng-pristine ng-valid"
       >
         <label for="name" className="self-start text-xs font-semibold">
           Full Name
@@ -67,7 +67,7 @@ const RegisterPage = () => {
           id="name"
           type="text"
           name="name"
-          className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 dark:text-gray-900 focus:dark:border-violet-400 focus:ring-violet-400"
+          className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 text-gray-900 focus:border-violet-400 focus:ring-violet-400"
           required
         />
         <label for="PhotoURL" className="self-start text-xs font-semibold">
@@ -77,7 +77,7 @@ const RegisterPage = () => {
           id="PhotoURL"
           type="text"
           name="photoURL"
-          className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 dark:text-gray-900 focus:dark:border-violet-400 focus:ring-violet-400"
+          className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 text-gray-900 focus:border-violet-400 focus:ring-violet-400"
           required
         />
 
@@ -88,7 +88,7 @@ const RegisterPage = () => {
           id="email"
           type="email"
           name="email"
-          className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 dark:text-gray-900 focus:dark:border-violet-400 focus:ring-violet-400"
+          className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 text-gray-900 focus:border-violet-400 focus:ring-violet-400"
           required
         />
 
@@ -99,12 +99,12 @@ const RegisterPage = () => {
           id="password"
           type="password"
           name="password"
-          className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 dark:text-gray-900 focus:dark:border-violet-400 focus:ring-violet-400"
+          className="flex items-center h-12 px-4 mt-2 rounded focus:outline-none focus:ring-2 text-gray-900 focus:border-violet-400 focus:ring-violet-400"
           required
         />
         <button
           type="submit"
-          className="flex items-center justify-center h-12 px-6 mt-8 text-sm font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
+          className="flex items-center justify-center h-12 px-6 mt-8 text-sm font-semibold rounded bg-violet-400 text-gray-900"
         >
           Sign up
         </button>
@@ -113,7 +113,7 @@ const RegisterPage = () => {
           <Link
             rel="noopener noreferrer"
             to="/login"
-            className="dark:text-gray-400"
+            className="text-gray-400"
           >
             Sign in
           </Link>

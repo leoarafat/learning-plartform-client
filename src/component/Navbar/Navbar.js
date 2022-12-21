@@ -5,6 +5,9 @@ import { AuthContext } from "../Context/UserContext";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
 import "./Navbar.css";
+
+
+
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [mode, setMode] = useState("light");
@@ -90,7 +93,7 @@ const Navbar = () => {
                 >
                   <h2>{mode}</h2>
                   <button className={`button-${mode}`} onClick={handleClick}>
-                    <input type="checkbox" className="toggle" checked />
+                    <input type="checkbox" className="toggle" defaultChecked />
                   </button>
                 </NavLink>
                 {/* sm nav */}
@@ -135,8 +138,9 @@ const Navbar = () => {
           </div>
 
           <NavLink to="/courses" className="btn btn-ghost normal-case text-xl">
-            <ComputerDesktopIcon className="w-6 h-6" />
-            Learn Program With AP
+            <ComputerDesktopIcon className="w-6 h-6 text-purple-800" />
+         
+          Programming Lab
           </NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -165,7 +169,7 @@ const Navbar = () => {
               >
                 <h2>{mode}</h2>
                 <button className={`button-${mode}`} onClick={handleClick}>
-                  <input type="checkbox" className="toggle" checked />
+                  <input type="checkbox" className="toggle" defaultChecked />
                 </button>
               </NavLink>
             </li>
